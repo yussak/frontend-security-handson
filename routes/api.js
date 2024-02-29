@@ -2,7 +2,15 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/",(req,res)=>{
-    res.send({mesage:"Hello"});
+    let message = req.query.message;
+
+    if (message === "") {
+        res.status(400);
+        message ="messageが空です";
+    }
+
+    res.send({mesage: message});
+    // res.send({mesage:"Hello"});
 });
 
 router.post("/",(req,res)=>{
