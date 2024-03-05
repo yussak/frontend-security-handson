@@ -37,3 +37,7 @@ module.exports = router;
 //     headers: {"X-lang": "en"},
 // });
 // await res.json()
+
+// await fetch("http://site.example:3000/api", {
+//     headers: {"X-Token": "asdfbafas3242dv"}
+// })
