@@ -1,8 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
+const allowList = [
+    "http://localhost:3000",
+    "http://site.example:3000"
+];
+
 router.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");;
+    // originヘッダが存在している＆リクエストを許可するリスト内に含まれている火チェック
+    if (req.headers.origin && allowList.includes(req.headers.origin)){
+        res.header("Access-Control-Allow-Origin", req.headers.origin);
+    }
+
     if (req.method === "OPTIONS") {
         res.header("Access-Control-Allow-Headers", "X-Token");
     }
@@ -52,5 +61,9 @@ module.exports = router;
 
 // await fetch("http://site.example:3000/api", {
 //     method: "GET",
+//     headers: {"X-Token": "asdfbafas3242dv"}
+// })
+
+// await fetch("http://localhost:3000/api", {
 //     headers: {"X-Token": "asdfbafas3242dv"}
 // })
